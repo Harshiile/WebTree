@@ -178,6 +178,7 @@ inputBox.forEach(item => {
 
 // Form submission
 form.addEventListener('submit', async (e) => {
+    submitBtn.value = 'Generating Site ....';
     let formData = {}
     e.preventDefault()
     for (let i = 0; i != e.target.length - 1; i++) {
