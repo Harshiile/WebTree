@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Car, Shield, Clock, Phone, Mail, MapPin, Star, Users, Trophy, ChevronRight } from 'lucide-react';
 
-interface Theme1Props {
-  content: any;
-}
 
-const Theme_1: React.FC<Theme1Props> = ({ content }) => {
+const Theme_1 = ({ content }) => {
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -16,24 +13,24 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <motion.header 
+      <motion.header
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="bg-gradient-to-r from-blue-600 to-blue-800 text-white relative overflow-hidden"
       >
-        <motion.div 
+        <motion.div
           className="absolute inset-0 bg-cover bg-center"
           initial={{ scale: 1.2 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.5 }}
-          style={{ 
+          style={{
             opacity: 0.2,
             backgroundImage: `url('${content.hero.backgroundImage}')`
           }}
         />
 
         <nav className="container mx-auto px-6 py-4 flex items-center justify-between relative z-10">
-          <motion.div 
+          <motion.div
             className="flex items-center space-x-2"
             whileHover={{ scale: 1.05 }}
           >
@@ -56,9 +53,9 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
             ))}
           </div>
         </nav>
-        
+
         <div className="container mx-auto px-6 py-20 relative z-10">
-          <motion.h1 
+          <motion.h1
             className="text-5xl font-bold mb-4"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -66,7 +63,7 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
           >
             {content.hero.title}
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-xl mb-8"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -74,7 +71,7 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
           >
             {content.hero.description}
           </motion.p>
-          <motion.button 
+          <motion.button
             className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors flex items-center gap-2 group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -88,14 +85,14 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
       {/* Services Section */}
       <section id="services" className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
-          <motion.h2 
+          <motion.h2
             className="text-3xl font-bold text-center mb-12"
             {...fadeInUp}
           >
             Our Services
           </motion.h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {content.services.map((service: any, index: number) => (
+            {content.services.map((service, index) => (
               <motion.div
                 key={service.title}
                 className="bg-white rounded-xl shadow-lg overflow-hidden"
@@ -106,7 +103,7 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
                 whileHover={{ y: -10 }}
               >
                 <div className="relative h-48">
-                  <img 
+                  <img
                     src={service.image}
                     alt={service.title}
                     className="w-full h-full object-cover"
@@ -116,7 +113,7 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
                   <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                   <p className="text-2xl font-bold text-blue-600 mb-4">{service.price}</p>
                   <ul className="space-y-2">
-                    {service.features.map((feature: string, i: number) => (
+                    {service.features.map((feature, i) => (
                       <li key={i} className="flex items-center gap-2 text-gray-600">
                         <ChevronRight className="text-blue-600 h-4 w-4" />
                         {feature}
@@ -140,14 +137,14 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
       {/* Testimonials Section */}
       <section id="testimonials" className="bg-gray-50 py-20">
         <div className="container mx-auto px-6">
-          <motion.h2 
+          <motion.h2
             className="text-3xl font-bold text-center mb-12"
             {...fadeInUp}
           >
             What Our Customers Say
           </motion.h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {content.testimonials.map((testimonial: any, index: number) => (
+            {content.testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 className="bg-white p-6 rounded-lg shadow-md"
@@ -181,7 +178,7 @@ const Theme_1: React.FC<Theme1Props> = ({ content }) => {
 
       {/* Footer/Contact Section */}
       <footer id="contact" className="bg-blue-900 text-white py-12">
-        <motion.div 
+        <motion.div
           className="container mx-auto px-6"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
