@@ -20,6 +20,7 @@
     "@types/nodemon": "^1.19.6",
     "dotenv": "^16.4.7",
     "nodemon": "^3.1.9",
+    "prisma": "^6.3.0",
     "typescript": "^5.7.3"
   }
 }
