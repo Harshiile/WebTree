@@ -13,7 +13,6 @@ const decryptPassword = async (password: string) => {
 
 export const loginController = async (req: Request<{}, {}, User>, res: Response<APIResponse>) => {
     const { email, password }: User = req.body
-
     const hashedPassword: string = await encryptPassword(password)
     const decryptPassword = "---"
     if (decryptPassword == hashedPassword) {

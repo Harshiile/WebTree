@@ -9,7 +9,6 @@ const routes_1 = __importDefault(require("./routes"));
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.urlencoded({ extended: true }));
-app.use(express_1.default.json()); // Just for testing
 app.use(routes_1.default);
 const PORT = process.env.PORT;
 app.get('/', (req, res) => {
