@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Github, Chrome, ArrowRight, Lock } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function App() {
     const [isLogin, setIsLogin] = useState(true);
@@ -12,7 +13,14 @@ function App() {
     };
 
     const FormContent = () => (
-        <div className="max-w-md w-full mx-auto">
+        <motion.div
+            key={isLogin ? 'login' : 'signup'}
+            initial={{ x: isLogin ? -50 : 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: isLogin ? 50 : -50, opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            className="max-w-md w-full mx-auto"
+        >
             <h1 className="text-white text-4xl font-bold mb-2">
                 {isLogin ? 'Welcome back' : 'Join WebTree'}
             </h1>
@@ -46,7 +54,7 @@ function App() {
 
                 <button
                     type="submit"
-                    className="w-full bg-gray-800 text-white py-3 rounded-xl hover:bg-gray-700 transition-colors flex items-center justify-center group"
+                    className="w-full bg-gray-800 text-white py-3 rounded-xl hover:bg-gray-700 transition-colors flex items-center justify-center group cursor-pointer"
                 >
                     {isLogin ? 'Sign in' : 'Continue'}
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -63,7 +71,7 @@ function App() {
 
                 <button
                     type="button"
-                    className="w-full bg-gray-900/50 border border-gray-800 text-white py-3 rounded-xl hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2 mb-3"
+                    className="w-full bg-gray-900/50 border border-gray-800 text-white py-3 rounded-xl hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2 mb-3 cursor-pointer"
                 >
                     <Chrome className="h-5 w-5" />
                     <span>Continue with Google</span>
@@ -71,7 +79,7 @@ function App() {
 
                 <button
                     type="button"
-                    className="w-full bg-gray-900/50 border border-gray-800 text-white py-3 rounded-xl hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2"
+                    className="w-full bg-gray-900/50 border border-gray-800 text-white py-3 rounded-xl hover:bg-gray-800 transition-colors flex items-center justify-center space-x-2 cursor-pointer"
                 >
                     <Github className="h-5 w-5" />
                     <span>Continue with GitHub</span>
@@ -79,7 +87,7 @@ function App() {
 
                 {isLogin && (
                     <div className="text-center mt-4">
-                        <button className="text-indigo-400 hover:text-indigo-300 transition-colors text-sm">
+                        <button className="text-indigo-400 hover:text-indigo-300 transition-colors text-sm cursor-pointer">
                             Forgot your password?
                         </button>
                     </div>
@@ -91,19 +99,24 @@ function App() {
                         <button
                             type="button"
                             onClick={() => setIsLogin(!isLogin)}
-                            className="text-indigo-400 hover:text-indigo-300 transition-colors"
+                            className="text-indigo-400 hover:text-indigo-300 transition-colors cursor-pointer"
                         >
                             {isLogin ? 'Sign up' : 'Log in'}
                         </button>
                     </p>
                 </div>
             </form>
-        </div>
+        </motion.div>
     );
 
     const PreviewContent = () => (
-        <div className="relative h-full flex items-center justify-center">
-            <div className="w-96 h-[32rem] bg-gray-900/50 backdrop-blur-xl rounded-3xl border border-gray-800/50 shadow-2xl transform rotate-6 overflow-hidden">
+        <motion.div
+            initial={{ rotate: isLogin ? 6 : -6 }}
+            animate={{ rotate: isLogin ? 6 : -6 }}
+            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+            className="relative h-full flex items-center justify-center"
+        >
+            <div className="w-96 h-[32rem] bg-gray-900/50 backdrop-blur-xl rounded-3xl border border-gray-800/50 shadow-2xl overflow-hidden">
                 <div className="p-6 space-y-4">
                     <div className="w-24 h-24 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 mx-auto" />
                     <div className="h-8 bg-gray-800/50 rounded-lg" />
@@ -120,25 +133,31 @@ function App() {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 
     return (
         <div className="min-h-screen bg-black flex">
-            <div
-                className={`w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-12 xl:px-24 transition-all duration-500 ${!isLogin ? 'order-2' : 'order-1'
-                    }`}
+            <motion.div
+                layout
+                layoutId="form-section"
+                transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+                className={`w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-12 xl:px-24 ${!isLogin ? 'order-2' : 'order-1'}`}
             >
-                <FormContent />
-            </div>
+                <AnimatePresence mode="wait">
+                    <FormContent />
+                </AnimatePresence>
+            </motion.div>
 
-            <div
-                className={`hidden lg:block w-1/2 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 relative overflow-hidden transition-all duration-500 ${!isLogin ? 'order-1' : 'order-2'
-                    }`}
+            <motion.div
+                layout
+                layoutId="preview-section"
+                transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+                className={`hidden lg:block w-1/2 bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 relative overflow-hidden ${!isLogin ? 'order-1' : 'order-2'}`}
             >
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe')] bg-cover bg-center opacity-10" />
                 <PreviewContent />
-            </div>
+            </motion.div>
         </div>
     );
 }
